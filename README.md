@@ -1,25 +1,49 @@
-#generator-symfony-rest
+#Symfony-Rest Generator
 
-It´s a YEOMAN packages for Symfony 2.8 skeleton
+symfony-rest is a YEOMAN package and provide a skeleton by Symfony 2.8 for a RestFull application.
 
 ##Dependencies
 
-###JMSSerializerBundle
+This package use this dependencies:
 
-[Page](http://jmsyst.com/bundles/JMSSerializerBundle)
+- [JMSSerializerBundle](http://jmsyst.com/bundles/JMSSerializerBundle)
+- [AsseticBundle](https://symfony.com/doc/current/cookbook/assetic/index.html)
+- [StofDoctrineExtensionsBundle](http://symfony.com/doc/current/bundles/StofDoctrineExtensionsBundle/index.html)
+- [FOSRestBundle](http://symfony.com/doc/current/bundles/FOSRestBundle/1-setting_up_the_bundle.html)
+- [NelmioApiDocBundle](https://github.com/nelmio/NelmioApiDocBundle)
+- [NelmioCorsBundle](https://github.com/nelmio/NelmioCorsBundle)
 
-###AsseticBundle
-[Page](https://symfony.com/doc/current/cookbook/assetic/index.html)
 
-###StofDoctrineExtensionsBundle
-[Page](http://symfony.com/doc/current/bundles/StofDoctrineExtensionsBundle/index.html)
+##How to install
 
-###FOSRestBundle
-[Page](http://symfony.com/doc/current/bundles/FOSRestBundle/1-setting_up_the_bundle.html)
+Firts, you need install [YEOMAN](http://yeoman.io/).
 
-###NelmioApiDocBundle
-[Page](https://github.com/nelmio/NelmioApiDocBundle)
+```
+$ npm install -g yo
+```
 
-###NelmioCorsBundle
-[Page](https://github.com/nelmio/NelmioCorsBundle)
+Then install generator-symfony-rest package.
 
+```
+$ npm -g install generator-symfony-rest
+```
+
+Finally, create a new work directory and generate the package.
+
+```
+$ mkdir project-name
+$ cd project-name
+$ yo symfony-rest
+``` 
+
+##How it works
+
+Is very easy to use, only you need run the server
+
+```
+$ app/console server:run
+```
+
+Now, in you web borwser typing http://localhost:8000
+
+That is all!
