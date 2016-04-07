@@ -44,6 +44,8 @@ Is very easy to use, only you need run the server
 $ app/console server:run
 ```
 
-Now, in you web borwser typing http://localhost:8000
+Now, in you web borwser typing http://localhost:8000 and you should see
+
+[](doc_resources/images/generator-symfony-rest.png?raw=true)
 
 That is all!
