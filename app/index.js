@@ -23,71 +23,83 @@ module.exports = generators.Base.extend({
 	      'Welcome to the smashing ' + chalk.red('generator-symfony-rest ') + ' generator!'
 	    ));
 		
+		this.log('	This package install:');
+		this.log('');
+		this.log('	Symfony : ' + chalk.blue.bold('2.8'));
+		this.log('	Dependencies:');
+		this.log('		JMSSerializerBundle');
+		this.log('		AsseticBundle');
+		this.log('		StofDoctrineExtensionsBundle');
+		this.log('		FOSRestBundle');
+		this.log('		NelmioApiDocBundle');
+		this.log('		NelmioCorsBundle');
+		this.log('');
+		
+		var prompts = [{
+			type	: 'confirm',
+			name	: 'startInstall',
+			message	: 'Start generation project ?',
+			default	: true
+		}]
+		
+		this.prompt(prompts, function (answers) {
+			this.startConfirm = answers.startInstall;
+			done();
+		}.bind(this));
+	},
+
+	
+	informationConf: function () {
+		if(this.startConfirm) {
+		var done = this.async();
+		
+			this.log('');
+			this.log(chalk.yellow.bold('Project Configuration'));
+			this.log('');
+		
 		var prompts = [{
 			type	: 'input',
 			name	: 'name',
 			message	: 'Your project name',
-			store	: true,
 			default	: this.appname
+		},{
+			type	: 'input',
+			name	: 'database_name',
+			message	: 'Database name : ',
+			default	: 'symfony',
+			store	: true,
+		},{
+			type	: 'input',
+			name	: 'database_user',
+			message	: 'Database user : ',
+			default	: 'root',
+			store	: true,
+		},{
+			type	: 'input',
+			name	: 'database_password',
+			message	: 'Database password : ',
+			default	: 'null',
+			store	: true,
+		},{
+			type	: 'input',
+			name	: 'secret_token',
+			message	: 'Secret token : ',
+			default	: 'ThisTokenIsNotSoSecretChangeIt',
+			store	: true,
 		}]
 		
 		this.prompt(prompts, function (answers) {
-			this.log(answers.name);
+			this.log('');
+			this.config.set(answers);
+			this.config.save();
 			done();
 		}.bind(this));
+	}
 	},
-	
-	informationConf: function () {
-		this.log('');
-		this.log('Symfony : ' + chalk.blue.bold('2.8'));
-		this.log('');
-	},
-	
-	// Instalar composer. Se debe evaluar si composer existe o no en el sistema
-	/*
-	installComposer: function() {
-	    this.log('');
-	    var done = this.async();
-	    this.log(chalk.green.bold('     Installation de composer'));
-	    child_process.exec('php -r "readfile(\'https://getcomposer.org/installer\');" | php', function(error, stdout, stderr) {
-	      if (error)
-	      {
-	        console.log('     Composer : '+chalk.red.bold('Error.'));
-	      }
-	      else{
-	        console.log('     Composer : '+chalk.green.bold('Install success.'));
-	      }
-	      done();
-	    }.bind(this));
-	  },
-	*/
-	  
-	  
-	/*
-	install: function () {
-		this.spawnCommand('composer', ['install']);
-	},
-	*/
-	
-
-    installComposer: function() {
-      this.log('');
-      var done = this.async();
-      this.log(chalk.green.bold('     Installation de composer'));
-      child_process.exec('php -r "readfile(\'https://getcomposer.org/installer\');" | php', function(error, stdout, stderr) {
-        if (error)
-        {
-          console.log('     Composer : '+chalk.red.bold('Error.'));
-        }
-        else{
-          console.log('     Composer : '+chalk.green.bold('Install success.'));
-        }
-        done();
-      }.bind(this));
-    },
 
     confirmInstall: function(){
-      console.log('');
+		if (this.startConfirm) {
+      this.log('');
       var done = this.async();
 
       var prompts = [{
@@ -103,6 +115,30 @@ module.exports = generators.Base.extend({
 		  done();
 
       }.bind(this));
+  }
+    },
+  
+	method1: function () {
+		this.log('');
+	},
+	
+
+    installComposer: function() {
+		if(this.writingConfirm) {
+      this.log('');
+      var done = this.async();
+      this.log(chalk.green.bold('	Installing composer ... '));
+      child_process.exec('php -r "readfile(\'https://getcomposer.org/installer\');" | php', function(error, stdout, stderr) {
+        if (error)
+        {
+          this.log('     Composer : '+chalk.red.bold('Error.'));
+        }
+        else{
+          this.log('	Composer : '+chalk.bgGreen.bold('Install success!'));
+        }
+        done();
+      }.bind(this));
+  }
     },
 
     writing: function () {
@@ -112,6 +148,17 @@ module.exports = generators.Base.extend({
           //this.fs.copy(this.templatePath('bin'), this.destinationPath('bin'));
           this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
           this.fs.copy(this.templatePath('web'), this.destinationPath('web'));
+		  
+		  this.fs.copyTpl(
+		  	this.templatePath('parametersConfig.yml'),
+			  this.destinationPath('app/config/parameters.yml'),
+			  {
+				  database_name: this.config.get('database_name'),
+				  database_user: this.config.get('database_user'),
+				  database_password: this.config.get('database_password'),
+				  secret_token: this.config.get('secret_token')
+			  }
+		  )
 
 
           this.template('_gitignore', '.gitignore');
@@ -132,7 +179,7 @@ module.exports = generators.Base.extend({
 
           var command = 'php composer.phar update';
 
-          console.log('');
+          this.log('');
           this.log(chalk.cyan('         Install Vendors...'));
           child_process.exec(command, function (error, stdout, stderr) {
             if (error != null)
@@ -151,8 +198,6 @@ module.exports = generators.Base.extend({
   },
   
 	method1: function () {
-		console.log(this.sourceRoot());
-		console.log('');
-		console.log(this.templatePath);
+		this.log('');
 	},
 });
