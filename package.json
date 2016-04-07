@@ -1,6 +1,6 @@
 {
   "name": "generator-symfony-rest",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Create a skeleton for symfony project with Restfull",
   "license": "MIT",
   "homepage": "https://github.com/miguelplazasr/generator-symfony-rest",
