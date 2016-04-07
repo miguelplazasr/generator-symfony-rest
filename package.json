@@ -1,0 +1,28 @@
+{
+  "name": "generator-symfony-rest",
+  "version": "0.1.0",
+  "description": "Create a skeleton for symfony project with Restfull",
+  "license": "MIT",
+  "homepage": "https://github.com/miguelplazasr/generator-symfony-rest",
+  "author": {
+    "name": "miguelplazasr",
+    "email": "miguelplazasr@gmail.com",
+    "url": "http://www.pulsar-it.net/"
+  },
+  "files": [
+    "app"
+  ],
+  "main": "app/index.js",
+  "keywords": [
+    "symfony",
+    "restfull",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.22.0",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.2",
+    "fs-extra": "^0.22.1",
+    "js-yaml": "^3.5.0"
+  }
+}
