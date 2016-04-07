@@ -109,7 +109,7 @@ module.exports = generators.Base.extend({
         if (this.writingConfirm)  {
           this.log('');
           this.fs.copy(this.templatePath('app'), this.destinationPath('app'));
-          this.fs.copy(this.templatePath('bin'), this.destinationPath('bin'));
+          //this.fs.copy(this.templatePath('bin'), this.destinationPath('bin'));
           this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
           this.fs.copy(this.templatePath('web'), this.destinationPath('web'));
 
