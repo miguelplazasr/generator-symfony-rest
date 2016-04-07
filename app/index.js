@@ -114,7 +114,7 @@ module.exports = generators.Base.extend({
           this.fs.copy(this.templatePath('web'), this.destinationPath('web'));
 
 
-          this.template('.gitignore', '.gitignore');
+          this.template('_gitignore', '.gitignore');
           this.template('composer.json', 'composer.json');
 
           //this.fs.copy(this.templatePath(this.projectMode + '/editorconfig'),this.destinationPath('.editorconfig'));
